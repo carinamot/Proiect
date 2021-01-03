@@ -1,10 +1,10 @@
-﻿using Proiect_.Models;
+﻿using Serviciu.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Proiect_.Data
+namespace Serviciu.Data
 {
     public class DBInitializer
     {

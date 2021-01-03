@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Proiect_.Data;
-using Proiect_.Models;
+using Serviciu.Data;
+using Serviciu.Models;
 
 namespace Proiect_.Controllers
 {
