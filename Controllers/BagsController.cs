@@ -20,9 +20,48 @@ namespace Proiect_.Controllers
         }
 
         // GET: Bags
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
-            return View(await _context.Bags.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+            var bags = from b in _context.Bags
+                        select b;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                bags = bags.Where(s => s.Name.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    bags = bags.OrderByDescending(b => b.Name);
+                    break;
+                case "Price":
+                    bags = bags.OrderBy(b => b.Price);
+                    break;
+                case "price_desc":
+                    bags = bags.OrderByDescending(b => b.Price);
+                    break;
+                default:
+                    bags = bags.OrderBy(b => b.Name);
+                    break;
+            }
+            int pageSize = 8;
+          
+            return View(await PaginatedList<Bag>.CreateAsync(bags.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Bags/Details/5
