@@ -10,9 +10,11 @@ using Serviciu.Models;
 using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Proiect_.Controllers
 {
+    [Authorize]
     public class CustomersController : Controller
     {
         private readonly ShopContext _context;

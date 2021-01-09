@@ -9,6 +9,7 @@ using Proiect_.Models;
 
 namespace Proiect_.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
