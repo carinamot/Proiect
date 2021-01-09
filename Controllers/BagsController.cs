@@ -61,7 +61,7 @@ namespace Proiect_.Controllers
                     bags = bags.OrderBy(b => b.Name);
                     break;
             }
-            int pageSize = 8;
+            int pageSize = 5;
           
             return View(await PaginatedList<Bag>.CreateAsync(bags.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
